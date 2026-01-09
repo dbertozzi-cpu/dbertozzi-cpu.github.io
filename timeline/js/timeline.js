@@ -9,6 +9,7 @@ const PIC_R = 670;
 const PIC_T = 0;
 const PIC_B = 345;
 
+
 const RECT = 0;		// Shapes
 const CIRC = 1;
 
@@ -32,7 +33,7 @@ const SUBJECT = ["Month", "Background", "Memory", "Processors",
 const WEEK = ["1", "2", "3", "4", "5", "6", "7", "8", "", "", "", "9", "10", "11", "12", "13", "14", "15"]
 
 const ITEMS = 2;
-// const TASKS = 21;	// Usually 20
+//const TASKS = 21;	// Usually 20
 
 const ITEM_1_X  = 120;
 const ITEM_1_Y  = TEXT_T + 30
@@ -241,7 +242,7 @@ ctx.clearRect(PIC_L, PIC_T, PIC_R - PIC_L, PIC_B - PIC_T);
 //ctx.strokeRect(PIC_L, PIC_T, PIC_R - PIC_L, PIC_B - PIC_T);
 
 drawGrid();
-for (i = 0; i < TASKS; i++) drawTask(i);
+for (i = 0; i < task.length; i++) drawTask(i);
 
 drawApps(false);
 drawCode(false);
