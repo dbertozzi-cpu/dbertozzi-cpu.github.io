@@ -29,7 +29,7 @@ const SUBJECT = ["Month", "Background", "Memory", "Processors",
                  "Recapitulation",
                  "Vacation (etc.)", "Exercises", "", ""];
 
-const WEEK = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "", "", "", "11", "12", "", "", ""]
+const WEEK = ["1", "2", "3", "4", "5", "6", "7", "8", "", "", "", "9", "10", "11", "12", "13", "14", "15"]
 
 const ITEMS = 2;
 const TASKS = 21;	// Usually 20
@@ -95,21 +95,21 @@ var task = [];
 var active = -1;		// Index of chosen task in array
 var i;
 
-task[0]  = new makeTask( 0, 0,  1.0, 5.0, "Yellow", "February");
-task[1]  = new makeTask( 0, 0,  5.0, 9.2, "Coral", "March");
-task[2]  = new makeTask( 0, 0,  9.2, 13.6, "Yellow", "April");
-task[3]  = new makeTask( 0, 0, 13.6, 18.0, "Coral", "May");
-task[4]  = new makeTask( 0, 0, 18.0, 19.0, "Yellow", "June");
+task[0]  = new makeTask( 0, 0,  0.0, 4.0, "Yellow", "February");
+task[1]  = new makeTask( 0, 0,  4.0, 8.2, "Coral", "March");
+task[2]  = new makeTask( 0, 0,  8.2, 12.7, "Yellow", "April");
+task[3]  = new makeTask( 0, 0, 12.7, 17.0, "Coral", "May");
+task[4]  = new makeTask( 0, 0, 17.0, 18.0, "Yellow", "June");
 task[5]  = new makeTask( 1, 1,  0,    1,   "LightBlue", "Intro");
 task[6]  = new makeTask( 2, 2,  1,    4,   "LightGreen", "Memory");
 task[7]  = new makeTask( 3, 2,  4,    5,   "Lime", "Disks");
 task[8]  = new makeTask( 4, 3,  5,    9, "Bisque", "Single");
 //task[9] = new makeTask(4, 4, 9, 10, "Bisque", "?!");
-task[9]  = new makeTask(14, 5, 10, 13, "Lime", "Easter");
+task[9]  = new makeTask(14, 5, 8, 11, "Lime", "Easter");
 task[10] = new makeTask( 5, 3,  9, 10, "Pink", "Multi");
 task[11] = new makeTask( 6, 3, 13, 14, "Pink", "proc");
 //task[11] = new makeTask( 6, 4, 12, 13, "CornflowerBlue", "?");
-task[12] = new makeTask( 0, 5, 15, 18.6, "Lime", "Exams.");
+task[12] = new makeTask( 0, 5, 15, 18, "Lime", "Exams.");
 task[13] = new makeTask( 7, 4,  4,  5, "Khaki", "f/b");
 task[14] = new makeTask( 8, 2, 14, 15, "LightGreen", "Mem");
 task[15] = new makeTask( 9, 4, 14, 15, "Gold", "Rev.");
@@ -118,7 +118,7 @@ task[17] = new makeTask(11, 6,  4,  7, "Grey", "Ex. 2");
 task[18] = new makeTask(12, 6,  7, 10, "LightGrey", "Ex.3");
 task[19] = new makeTask(15, 2,  0,  1, "Lime", "Bus");
 //task[20] = new makeTask(5, 3, 7, 8, "Pink", "Multi");
-task[20] = new makeTask( 0, 0,  0, 1.0, "Coral", "Jan");// January crept in!
+//task[20] = new makeTask( 0, 0,  0, 1.0, "Coral", "Jan");// January crept in!
 
 item[0] = new makeItem(1, RECT, ITEM_1_X, ITEM_1_Y, ITEM_1_DX, ITEM_1_DY);
 item[1] = new makeItem(2, RECT, ITEM_2_X, ITEM_2_Y, ITEM_2_DX, ITEM_2_DY);
@@ -277,10 +277,10 @@ switch (state)
 //  textOut(2, "TWO LINES"); 
     break;
   case 4:
-    textOut(0.5, "Pipelining    Data dependencies");
-    textOut(1.5, "Control dependencies"); 
-    textOut(2.5, "Superscalar processors"); 
-    textOut(3.5, "Precise exceptions"); 
+    textOut(0.5, "Pipelining & Data dependencies");
+    textOut(1.5, "Control dependencies & Superscalar"); 
+    textOut(2.5, "Reorder Buffer & Out-of-Order Execution"); 
+//    textOut(3.5, "Precise exceptions"); 
     break;
   case 5:
     textOut(1.25, "Out of order execution"); 
