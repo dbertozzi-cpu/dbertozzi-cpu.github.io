@@ -32,7 +32,7 @@ const SUBJECT = ["Month", "Background", "Memory", "Processors",
 const WEEK = ["1", "2", "3", "4", "5", "6", "7", "8", "", "", "", "9", "10", "11", "12", "13", "14", "15"]
 
 const ITEMS = 2;
-const TASKS = 21;	// Usually 20
+// const TASKS = 21;	// Usually 20
 
 const ITEM_1_X  = 120;
 const ITEM_1_Y  = TEXT_T + 30
@@ -166,7 +166,7 @@ ctx.canvas.addEventListener('mousemove', function(event)
         }
       }
 */
-    for (i = 0; i < TASKS; i++)
+    for (i = 0; i < task.length; i++)
       {
       if (in_area(WEEK_X + task[i].start * WEEK_DX,
                   WEEK_Y + task[i].row * WEEK_DY,
