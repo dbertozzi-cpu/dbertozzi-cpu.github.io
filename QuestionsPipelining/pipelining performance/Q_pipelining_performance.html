@@ -1,0 +1,33 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>Question: Pipelining</h2>
+<p>A program running on a 5-stage pipelined processor has been profiled and
+  consists of:</p>
+<ul>
+<li>25% loads</li>
+<li>10% stores</li>
+<li>11% conditional branches</li>
+<li>&nbsp; 2% unconditional branches (or jumps)</li>
+<li>52% arithmetic or logic operations (called R-type, or Register-type, operations)</li>
+</ul>
+<p>The processor has an early branch resolution mechanism in the DECODE stage.<br>
+  It does not use prediction, but rather flushes wrongly-fetched instructions
+  in case the branch is taken.</p>
+<p>Assume:</p>
+<ul>
+<li>40% of loads used by next instruction</li>
+<li>25% of branches mispredicted</li>
+<li>All jumps flush the next instruction</li>
+</ul>
+<p><strong>1) What is the average clock-per-instruction (CPI)</strong>?</p>
+<div>If this program has 100 billion instructions executing and the underlying
+  pipelined processor has a clock cycle time of T<sub>c</sub>&nbsp;=&nbsp;550&nbsp;ps,</div>
+<p></p>
+<div><strong>2) what is the total execution time of the program?</strong></div>
+<p></p>
+<div><strong>3) With a single-cycle processor, what would be the maximum
+    clock period Tc in order to execute </strong></div>
+<div><strong>the same 100-billion instruction program with an equal or
+    lower execution time?</strong></div>
+<blockquote style="color:red"><a href="https://online.manchester.ac.uk/bbcswebdav/pid-15829242-dt-content-rid-193981783_1/courses/I3132-COMP-25212-1241-2SE-001895/slides/solution.pdf">Solution</a></blockquote>
+<hr>
+</body></html>

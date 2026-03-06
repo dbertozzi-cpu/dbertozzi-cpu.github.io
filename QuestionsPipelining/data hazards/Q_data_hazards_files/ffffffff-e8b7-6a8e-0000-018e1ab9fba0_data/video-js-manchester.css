@@ -1,0 +1,91 @@
+.video-js .vjs-big-play-button {
+    left: 50%;
+    margin-left: -1.5em;
+    top: 50%;
+    margin-top: -1.5em;
+    width: 3em;
+    height: 3em;
+    border: 0 solid #3b4249;
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    border-radius: 10em;
+}
+
+.vjs-big-play-centered .vjs-big-play-button {
+    margin-left: -1.5em;
+    margin-top: -1.5em;
+}
+
+.video-js .vjs-big-play-button:before {
+    line-height: 3em;
+}
+
+.video-js .vjs-play-progress {
+    background: #6b2c90 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat;
+}
+
+.video-js .vjs-volume-level {
+    background: #6b2c90 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat;
+}
+
+.vj-captions {
+  color: #fff;
+}
+
+.video-js .vjs-text-track {
+  font-size: 2em;
+  text-align: center;
+}
+
+.video-js .vjs-downloads-button {
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' class='feather feather-download' style='fill:none;stroke-linejoin:round;stroke-width:2;stroke:white'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E");
+}
+
+.video-js .vjs-downloads-button a:link,
+.video-js .vjs-downloads-button a:hover,
+.video-js .vjs-downloads-button a:active,
+.video-js .vjs-downloads-button a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.video-js .vjs-downloads-button .vjs-menu {
+    width: 15em;
+    left: -10em;
+}
+
+.video-js .vjs-title-bar-link {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: none;
+    font-size: 2em;
+    padding: .5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.video-js .vjs-title-bar-link a:link,
+.video-js .vjs-title-bar-link a:hover,
+.video-js .vjs-title-bar-link a:active,
+.video-js .vjs-title-bar-link a:visited {
+    color: white;
+}
+
+/*
+Only show the title bar after playback has begun (so as not to hide
+the big play button) and only when paused or when the user is
+interacting with the player.
+*/
+.video-js.vjs-paused.vjs-has-started .vjs-title-bar-link,
+.video-js.vjs-user-active.vjs-has-started .vjs-title-bar-link{
+    display: block;
+ }
+
+.video-js .vjs-control:focus,
+.video-js .vjs-menu-item:focus {
+    box-shadow: inset 0px 0px 5px 0px #6b2c91;
+}

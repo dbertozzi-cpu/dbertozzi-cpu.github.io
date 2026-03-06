@@ -1,0 +1,44 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>Single-cycle vs. Pipelining</h2>
+
+<p>Imagine we have a non-pipelined processor running at 10&nbsp;MHz
+and want to run a program with 1000 instructions.</p>
+
+<p>a) How much time would it take to execute the program?</p>
+
+<p>Assuming ideal conditions (balanced pipeline stages, no hazards),
+how much time would it take to execute the same program in:</p>
+
+<p>b) A 10-stage pipeline?</p>
+
+<p>c) A 100-stage pipeline?</p>
+
+<p>
+Looking at those results, it seems clear that increasing pipeline
+depth should increase the execution speed of a processor.  Why do you
+think that processor designers (e.g, Intel, see below) have not only
+stopped increasing pipeline length but, in fact, reduced it?
+</p>
+
+<ul>
+<li>Pentium III – Coppermine (1999) ......... 10-stage pipeline</li>
+
+<li>Pentium IV – NetBurst (2000) .............. 20-stage pipeline</li>
+
+<li>Pentium Prescott (2004) ........................ 31-stage pipeline</li>
+
+<li>Core i7 9xx – Bloomfield (2008) .......... 24-stage pipeline</li>
+
+<li>Core i7 5Yxx – Broadwell (2014) ......... 19-stage pipeline</li>
+
+<li>Core i7 77XX – Kaby Lake (2017) .....  ~20-stage pipeline</li>
+</ul>
+
+<blockquote>
+  <a href="https://online.manchester.ac.uk/bbcswebdav/pid-15829242-dt-content-rid-193981783_1/courses/I3132-COMP-25212-1241-2SE-001895/slides/solution_singlecycle_vs_pipelining.pdf">Solution</a>
+</blockquote>
+<center>
+<p><iframe width="660" height="380" style="border: none; overflow: hidden;" src="Q_single_cycle_files/ffffffff-b2cf-017f-0000-018e1aa402a0.htm" scrolling="no" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+</center>
+<hr>
+</body></html>
