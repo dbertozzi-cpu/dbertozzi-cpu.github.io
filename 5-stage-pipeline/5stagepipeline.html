@@ -1,0 +1,92 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>Pipeline Demonstration</h2>
+
+<p>There are many ways to 'pipeline' a unit.  A 'classic' example is a
+<b>processor</b> divided into <b>5 stages</b> (as discussed in the intro videos).  This is a realistic
+division which is also useful to illustrate some problems with
+pipelines and ways to alleviate these problems.</p><p>
+
+</p><dl>
+<dt>Fetch</dt>
+<dd>Read an instruction as indicated by PC, including instruction
+memory access; increment PC.</dd>
+<dt>Decode</dt>
+<dd>Work out what the instruction is to do; read any register operands.</dd>
+<dt>Execute</dt>
+<dd>Perform any <i>calculation</i>, including any address derivation.<br>
+    This stage also determines the branch destination.</dd>
+<dt>Memory</dt>
+<dd>Perform any <i>data transfer</i> for loads and stores; just a
+placeholder for purely internal operations.</dd>
+<dt>Writeback</dt>
+<dd><i>Retire</i> results to the register file for reuse.</dd>
+</dl>
+
+<p>Every instruction can be executed by progressing along this
+pipeline although some circumstances ("<b>dependencies</b>") may
+introduce delays to a perfectly smooth flow.</p>
+
+
+<p><b>Five stage pipeline demo. <i>without</i> forwarding paths.</b></p>
+
+<p><canvas id="canvas_pipeline" width="900" height="252"></canvas></p>
+<script src="5stagepipeline_files/pipeline.js"></script>
+
+<p><b>Five stage pipeline demo. <i>with</i> forwarding paths.</b></p>
+
+<p><canvas id="canvas_pipeline_fwd" width="900" height="252"></canvas></p>
+<script src="5stagepipeline_files/pipeline_fwd.js"></script>
+
+<p>The coloured dots indicate:</p>
+
+<ul>
+<li> top left: a specific instruction identifier
+</li><li> top right: a dependency on a preceding instruction
+</li></ul>
+
+<p>In reality one instruction may depend on more than one other
+instruction but that would clutter up this demonstration!</p>
+
+<h3>Instructions</h3>
+
+<ul>
+<li> First pick an instruction category
+</li><li> Optionally, set a dependency on a preceding instruction
+</li><li> Beware of pipeline stalls!
+</li></ul>
+
+<h4>Experiments</h4>
+
+<ol>
+<li> Send non-dependent instructions
+</li><li> Add a jump: observe pipeline flush
+</li><li> Add some (close) dependencies: observe forwarding
+</li><li> Add a dependency on an <i>immediately preceding</i> load: observe stall
+</li><li> Add a dependency on a store: no stall needed
+</li></ol>
+
+<p>Note that this pipeline assumes assumes that instruction fetches
+and data transfers can take place simultaneously: i.e. a
+<b>Harvard</b> architecture.</p>
+
+<p>The potentially dependent 'slot' following a load is called a
+<b>delay slot</b>.  Deeper pipelines may have several consecutive
+delay slots.</p>
+
+<p>Note that the load latency penalty can be avoided if a useful,
+<i>non-dependent</i> instruction follows a load.  Most
+compilers will spot dependencies and (if possible)
+<i>reorder</i> the code to separate dependent instructions.<br>
+High-performance processors will detect dependencies at
+instruction-decode time and <b>reorder</b> the instruction stream
+to fill a delay slot if they can.</p>
+
+<hr>
+
+<script>
+var canvas_pipeline = document.getElementById('canvas_pipeline');
+var canvas_pipeline_fwd = document.getElementById('canvas_pipeline_fwd');
+run_pipeline(canvas_pipeline);
+run_pipeline_fwd(canvas_pipeline_fwd);
+</script>
+</body></html>
