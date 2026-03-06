@@ -26,14 +26,14 @@ overcome the memory bottleneck.<br>
 The von Neumann architecture is usually more convenient for
 programmers: the available memory can be partitioned dynamically into
 code and data segments as is currently appropriate.  Data and code can
-be interchanged, e.g. loading then running a ‘binary’ file
+be interchanged, e.g. loading then running a â€˜binaryâ€™ file
 or compiling a programme.
 </p>
 
 <p>
-Most contemporary ‘big’ computers - x86, ARM etc. - use a von
+Most contemporary â€˜bigâ€™ computers - x86, ARM etc. - use a von
 Neumann architecture.  <i>That is not to say their
-</i>implementation<i> is purely ‘von Neumann’.</i>  Some
+</i>implementation<i> is purely â€˜von Neumannâ€™.</i>  Some
 contemporary embedded controllers - notably the
 <a href="https://en.wikipedia.org/wiki/AVR_microcontrollers">AVR</a>
 used in the small <a href="https://www.arduino.cc/">Arduino</a>
@@ -47,8 +47,8 @@ controller boards - are Harvard architecture.  Here's a memory map:
 </center>
 
 <p>
-Another ‘different’ feature of the AVR is that its
-‘registers’ are aliased into the (data) memory space.
+Another â€˜differentâ€™ feature of the AVR is that its
+â€˜registersâ€™ are aliased into the (data) memory space.
 </p>
 
 <blockquote style="color:blue">
@@ -111,7 +111,7 @@ in <b>multiprocessors</b>.  There are many ways
 to organise this but the most commonly encountered is
 a <a href="https://en.wikipedia.org/wiki/Multi-core_processor">multi-core
 processor</a> where there is a single (von Neumann) address space with
-the various processor ‘cores’ - each a fully capable processor - share
+the various processor â€˜coresâ€™ - each a fully capable processor - share
 access to this memory.
 </p>
 
@@ -144,7 +144,7 @@ background activity) on a quad-core Linux system.
 <!--<p>&nbsp;</p>-->
 
 <p>Sometimes there is sufficient demand that processors with
-‘different’ requirements are produced.  One example is the
+â€˜differentâ€™ requirements are produced.  One example is the
 class of Digital Signal Processors (<b>DSP</b>s).  Frequent
 requirements include matrix multiplication which involves
 reading <i>pairs</i> of operands at high speed.  Thus they may
