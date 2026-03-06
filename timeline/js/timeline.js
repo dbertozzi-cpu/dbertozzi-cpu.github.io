@@ -109,18 +109,18 @@ task[8]  = new makeTask( 4, 3,  5,    8, "Bisque", "Single");
 task[9]  = new makeTask(14, 5, 8, 11, "Lime", "Easter");
 task[10] = new makeTask( 5, 3,  11, 12, "Pink", "Multi");
 //task[11] = new makeTask( 6, 3, 12, 13, "White", "proc");
-//task[11] = new makeTask( 6, 4, 12, 13, "CornflowerBlue", "?");
-task[11] = new makeTask( 0, 5, 15, 18, "Lime", "Exams.");
-task[12] = new makeTask( 7, 4,  4,  5, "Khaki", "f/b");
-task[13] = new makeTask( 8, 2, 12, 13, "LightGreen", "Mem");
-task[14] = new makeTask( 9, 4, 13, 14, "Gold", "Rev.");
-task[15] = new makeTask(10, 6,  3,  6, "LightGrey", "Ex. 1");
-task[16] = new makeTask(11, 6,  6,  8, "Grey", "Ex. 2");
-task[17] = new makeTask(12, 6,  12, 15, "LightGrey", "Ex.3");
-task[18] = new makeTask(15, 2,  0,  1, "Lime", "Bus");
+task[11] = new makeTask( 6, 4, 6, 7, "CornflowerBlue", "Rev.");
+task[12] = new makeTask( 0, 5, 15, 18, "Lime", "Exams.");
+task[13] = new makeTask( 7, 4,  4,  5, "Khaki", "f/b");
+task[14] = new makeTask( 8, 2, 12, 13, "LightGreen", "Mem");
+task[15] = new makeTask( 9, 4, 13, 14, "Gold", "Rev.");
+task[16] = new makeTask(10, 6,  3,  6, "LightGrey", "Ex. 1");
+task[17] = new makeTask(11, 6,  6,  8, "Grey", "Ex. 2");
+task[18] = new makeTask(12, 6,  12, 15, "LightGrey", "Ex.3");
+task[19] = new makeTask(15, 2,  0,  1, "Lime", "Bus");
 //task[20] = new makeTask(5, 3, 7, 8, "Pink", "Multi");
 //task[20] = new makeTask( 0, 0,  0, 1.0, "Coral", "Jan");// January crept in!
-task[19] = new makeTask(11, 6,  11,  12, "Grey", "");
+task[20] = new makeTask(11, 6,  11,  12, "Grey", "");
 
 
 item[0] = new makeItem(1, RECT, ITEM_1_X, ITEM_1_Y, ITEM_1_DX, ITEM_1_DY);
@@ -290,7 +290,7 @@ switch (state)
     textOut(2.75, "Multiprocessors");; 
     break;
   case 6:
-    textOut(2, "Multicore"); 
+    textOut(2, "Revision examples"); 
     break;
   case 7:
     textOut(2, "Feedback on memory and system architecture"); 
