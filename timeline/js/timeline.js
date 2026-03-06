@@ -304,16 +304,16 @@ switch (state)
     break;
   case 10:
     textOut(1.25, "Cache Modelling"); 
-    textOut(2.75, "Deadline: by 15th March"); 
+    textOut(2.75, "Deadline: by 13th March"); 
     break;
   case 11:
     textOut(1.00, "Code Tracing"); 
     textOut(2.00, "& Branch Prediction"); 
-    textOut(3.00, "Deadline: by 26th April"); 
+    textOut(3.00, "Deadline: by 24th April"); 
     break;
   case 12:
     textOut(1.25, "Matrix Multiplication"); 
-    textOut(2.75, "Deadline: by 17th May"); 
+    textOut(2.75, "Deadline: by 15th May"); 
     break;
   case 13:
     textOut(1.25, "Leftover :-)"); 
