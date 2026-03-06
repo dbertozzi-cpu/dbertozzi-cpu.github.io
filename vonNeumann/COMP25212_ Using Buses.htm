@@ -1,0 +1,162 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>COMP25212: Using Buses</title>
+
+</head><body><h1>Buses: von Neumann vs. Harvard</h1>
+
+<p>The classic computer architecture, <i>as perceived by the
+programmer</i> is the
+<a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture">von
+Neumann architecture</a>.  A key characteristic is that a unified
+memory holds both instructions and data.</p>
+
+<center>
+<img src="COMP25212_%20Using%20Buses_files/architectures.png" alt="von Neumann and Harvard architectures">
+</center>
+
+<p>The most commonly cited alternative is the
+<a href="https://en.wikipedia.org/wiki/Harvard_architecture">Harvard
+architecture</a> where instructions and data are in separate address
+spaces.</p>
+
+<p>The Harvard architecture offers more engineering flexibility: data
+and instruction words can be different sizes.  In particular it allows
+instruction fetches in parallel with data movement, helping to
+overcome the memory bottleneck.<br>
+
+The von Neumann architecture is usually more convenient for
+programmers: the available memory can be partitioned dynamically into
+code and data segments as is currently appropriate.  Data and code can
+be interchanged, e.g. loading then running a ‘binary’ file
+or compiling a programme.
+</p>
+
+<p>
+Most contemporary ‘big’ computers - x86, ARM etc. - use a von
+Neumann architecture.  <i>That is not to say their
+</i>implementation<i> is purely ‘von Neumann’.</i>  Some
+contemporary embedded controllers - notably the
+<a href="https://en.wikipedia.org/wiki/AVR_microcontrollers">AVR</a>
+used in the small <a href="https://www.arduino.cc/">Arduino</a>
+controller boards - are Harvard architecture.  Here's a memory map:
+</p>
+
+<center>
+<a href="https://protostack.com.au/2010/12/avr-memory-architecture/">
+<img width="50%" ;="" height:auto;="" src="COMP25212_%20Using%20Buses_files/AVR_memory_01.jpg" alt="AVR memory map">
+</a>
+</center>
+
+<p>
+Another ‘different’ feature of the AVR is that its
+‘registers’ are aliased into the (data) memory space.
+</p>
+
+<blockquote style="color:blue">
+<b>Exploration:</b> you might try looking at
+an <a href="http://ww1.microchip.com/downloads/en/devicedoc/doc2466.pdf">AVR
+datasheet</a>, both to see an example of a small system datasheet.
+Don't memorise all 357 pages (!) but the block diagram on p.3 and the
+data memory map (p.17) might be worth a glance.
+</blockquote>
+
+<h3>Harvard architecture at cache level</h3>
+
+<img src="COMP25212_%20Using%20Buses_files/Harvard_cache.png" alt="Harvard caches in von Neumann architecture" align="left">
+
+<p>
+Although most high-performance processors present a von Neumann
+<i>programming model</i> they typically have Harvard-style
+architecture at cache level with separate buses.  These connect
+different processor pipeline stages to parallel <i><b>caches</b></i>.
+This allows data loads and stores to run in parallel with instruction
+fetches, increasing the effective memory bandwidth.  Unification of
+the memory model is provided below this so <i>mostly</i> this looks
+like a von Neumann space to the programmer.
+</p>
+
+<p>
+Although the software rarely needs to accommodate this there are
+potential problems.  For example, if code is
+<a href="https://en.wikipedia.org/wiki/Self-modifying_code"><b>self-modifying</b></a>
+- i.e. it tries to write or alter its own instructions - the writes
+will alter the data cache but usually won't change any copy held in
+the instruction cache.<br>
+
+Although explicit self-modification is usually a Bad Idea it is
+implicit in techniques like
+<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT
+compilation</a> and
+<a href="https://en.wikipedia.org/wiki/Binary_translation">dynamic
+binary translation</a> which are now quite widely employed.
+</p>
+
+<p>
+When object code has been written it is usually necessary to provide
+some sort of
+<a href="https://en.wikipedia.org/wiki/Memory_barrier"><b>memory
+barrier</b></a> which ensures that the writes are complete before
+trying to read them and, probably, a cache <i>flush</i> to ensure any
+cached instructions are up to date.
+</p>
+
+<!-- Intro. to coherency: link towards multiprocessors. -->
+
+
+<p>&nbsp;</p>
+
+<p>
+Another issue is how the address space is organised
+in <b>multiprocessors</b>.  There are many ways
+<!--<mark>[[link]]</mark>-->
+to organise this but the most commonly encountered is
+a <a href="https://en.wikipedia.org/wiki/Multi-core_processor">multi-core
+processor</a> where there is a single (von Neumann) address space with
+the various processor ‘cores’ - each a fully capable processor - share
+access to this memory.
+</p>
+
+<img src="COMP25212_%20Using%20Buses_files/multicore.png" alt="Multi-core processor" align="right">
+<!--<center>
+</center>-->
+
+<p>
+This model simplifies programming and operating system organisation
+since an active process can be assigned and reassigned to any core.
+You might be able to see this if you have a multi-core system
+(likely!) and some form of performance meter or system monitor.<br>
+There's an example below with a single busy process (plus low-level
+background activity) on a quad-core Linux system.
+</p>
+
+<br clear="left"><p></p>
+
+<center>
+<img src="COMP25212_%20Using%20Buses_files/multiproc.png" alt="Task switching cores">
+</center>
+
+
+<!--<p><mark>** Want a side branch revising virtual and physical addresses! **</mark></p>-->
+
+<img src="COMP25212_%20Using%20Buses_files/DSP.png" alt="Generic DSP buses" align="right">
+
+<h3>Other architectures (examples)</h3>
+
+<!--<p>&nbsp;</p>-->
+
+<p>Sometimes there is sufficient demand that processors with
+‘different’ requirements are produced.  One example is the
+class of Digital Signal Processors (<b>DSP</b>s).  Frequent
+requirements include matrix multiplication which involves
+reading <i>pairs</i> of operands at high speed.  Thus they may
+have <i>two data buses</i> (or more!).</p><p>
+
+<br clear="right"></p>
+
+<!--<mark>Very brief GPU para + pic.</mark>-->
+
+<hr>
+
+<p>Next: <a href="https://online.manchester.ac.uk/bbcswebdav/pid-15829242-dt-content-rid-193981783_1/courses/I3132-COMP-25212-1241-2SE-001895/html/hierarchy.html">Memory hierarchy.</a></p>
+
+<hr>
+</body></html>
