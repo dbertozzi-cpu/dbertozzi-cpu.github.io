@@ -1,0 +1,95 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>JS test</title>
+
+</head><body><h2>A Simple Processor Pipeline</h2>
+
+<p>The simplest pipeline - hardly worth the name! - will have two
+stages.  In a processor these will be a <b>prefetch</b> stage which
+fetches an instruction and an <b>execution</b> stage which does the
+processing work.</p>
+
+<!-- <mark>Static figure?</mark><p> -->
+
+<p>A slightly more illustrative pipeline is exemplified by the early
+(and some current) ARM implementations with three stages.</p>
+
+<dl>
+<dt>Fetch</dt>
+<dd>Read an instruction as indicated by PC, including instruction
+    memory access; increment PC.</dd>
+<dt>Decode</dt>
+<dd>Work out what the instruction is to do.</dd>
+<dt>Execute</dt>
+<dd>Read register operands, perform any <i>calculation</i> (including
+    any address derivation) and - unless the operation is load or
+    store - write the result back.</dd>
+</dl>
+
+<p>An advantage of this structure is that it avoids many
+<a href="https://en.algorithmica.org/hpc/pipelining/hazards/"><b>hazards</b></a>
+in the execution phase.  A disadvantage of this structure is that many
+functions are crammed into the 'execute' stage, slowing it, and hence
+the whole pipeline, down.<br>
+This was also intended to facilitate interspersing load and store
+execution with instruction fetches with a <i>single memory
+interface</i>.  Note how the memory is shared but kept busy under
+(nearly) all circumstances.</p>
+
+<p><canvas id="canvas_pipeline_3s" width="600" height="310"></canvas></p>
+<script src="3stagepipeline_files/pipeline_3s.js"></script>
+
+
+<hr>
+<!--
+<h2>Pipeline 'animation'</h2>
+
+<p>There are many ways to 'pipeline' a unit.  A 'classic' example is a
+<b>processor</b> divided into <b>5 stages</b>.  This is a realistic
+division which is also useful to illustrate some problems with
+pipelines and ways to alleviate these problems.<p>
+
+<dl>
+<dt>Fetch</dt>
+<dd>Read an instruction as indicated by PC, including instruction
+memory access; increment PC.</dd>
+<dt>Decode</dt>
+<dd>Work out what the instruction is to do; read any register operands.</dd>
+<dt>Execute</dt>
+<dd>Perform any <i>calculation</i>, including any address derivation.<br>
+    This stage also determines the branch destination.</dd>
+<dt>Memory</dt>
+<dd>Perform any <i>data transfer</i> for loads and stores; just a
+placeholder for purely internal operations.</dd>
+<dt>Writeback</dt>
+<dd><i>Retire</i> results to the register file for reuse.</dd>
+</dl>
+
+<p>Every instruction can be executed by progressing along this
+pipeline although some circumstances ("<b>dependencies</b>") may
+introduce delays to a perfectly smooth flow.</p>
+
+Pipeline animation with dependencies<p>
+
+Interactive 5-stage pipeline: range of menus with increasing flexibility in what can be injected into fetch.<br>
+Add options for some forwarding paths.<p>
+
+<p><canvas id="canvas_pipeline" width="900" height="250"></canvas></p>
+<script src = "js/pipeline.js"></script>
+
+
+Maybe offer a similar system for illustrating <b>write buffers</b>.<p>
+
+<p>In the example below a three-entry write buffer has been added to a
+system where the memory takes three cycles to complete either a read
+or a write transaction.  (These cycles are highlighted in different
+colours.)<br>
+The 'Stall' button inserts idle cycles, which are needed if the
+processor is waiting for a memory resource.  Other buttons will only
+respond if the corresponding step can be taken.</p>
+
+<hr>
+
+The end<p>
+-->
+<script src="3stagepipeline_files/start_pipeline_demos.js"></script>
+</body></html>
