@@ -1,0 +1,123 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>Branch prediction</h2>
+
+<p>The usual way processors fetch instructions is to
+‘assume’ that the next instruction is at the successive
+address from the current one, unless overridden by a branch.  Branches
+are relatively rare (on average about every six or seven operations)
+so speculating on this is <i>fairly</i> effective.</p>
+
+<p>The problem is that branches disturb the pipeline flow and are
+frequent enough to cause problems.  A deeply pipelined processor can
+have more than six or seven instructions in its pipeline!</p>
+
+<p>A branch predictor attempts to spot the branches before they are
+fetched and adjust what is fetched to avoid the wrong operations.</p>
+
+<p>A <b>Branch Target Buffer</b> (BTB) is a cache structure which is
+placed in parallel with the PC incrementer.  It holds a subset of
+branches previously encountered (<i>temporal locality</i> is assumed)
+pairing the instruction address with its destination.  If the current
+PC value is spotted as a branch then the destination can override the
+incrementer output.</p>
+
+<p>A predicted branch is tagged as such so that it can be undone if
+the prediction was incorrect</p>
+
+<p>The example below is a contrived structure comprising two nested
+loops with an ‘if’ statement in the centre.  In
+‘Option&nbsp;A’ the ‘if’ is rarely taken which
+means the branch to ‘skip’ is usually taken.<br>
+‘Option&nbsp;B’ reverses the frequency of the ‘if’
+being taken, which means that a naive ‘assume branches always
+taken’ approach works less well: more ‘unbranches’
+are needed.</p>
+
+<center>
+<p><canvas id="canvas_BTB" width="860" height="590"></canvas></p>
+<script src="BTB_files/BTB.js"></script>
+</center>
+
+<p>The pipeline here has <b>three stages</b>; the flow through these
+is highlighted in the code.  A <i>taken</i> branch will incur a two
+cycle penalty as the pipeline refills, unless predicted.</p>
+
+<h3>Demo Instructions</h3>
+
+<ul>
+
+<li>First step through with the BTB off and observe the frequent
+    branches and pipeline refills.</li>
+
+<li>Reset and repeat with the BTB enabled; notice there are far fewer
+    explicit branches since most will be predicted.  Some predictions
+    will be erroneous, requiring an ‘unbranch’.</li>
+
+<li>Reset and repeat with code ‘Option&nbsp;B’ where fewer
+    branches should be taken.  The naive speculation is not as
+    effective and more unbranches are therefore needed.<br>  Note that
+    a reset is used to flush the BTB when changing the code in memory.
+    What could happen if the code changed without flushing old BTB
+    contents?</li>
+
+<li>Repeat with ‘Dynamic’ prediction enabled.  This
+    improves the accuracy of predictions on ‘Option&nbsp;B’.<br>
+    Some extra state is seen in the BTB, as described below.</li>
+
+</ul>
+
+<h4>Dynamic branch prediction</h4>
+
+<p><b>Static branch prediction</b> uses fixed assumptions such as
+‘always taken’.  There are more sophisticated static
+approaches with <b>conditional</b> branches, such as ‘backwards
+taken’ (it's probably a loop and loops tend to iterate many
+times) ‘forwards not taken’ (it's probably an
+‘if’).</p><p>
+
+</p><p><b>Dynamic branch prediction</b> uses run-time information to try
+to predict whether a conditional branch will be taken or not.  A
+simple approach is ‘the same as last time’ – but this is
+not very good with loops since, when a loop is entered it will predict
+that it will <i>not</i> iterate, since most recently it exited.</p>
+
+<p>A more sophisticated approach (illustrated below and used in the
+example) holds a counter per entry so, if one behaviour has dominated
+it takes two successive occurences of the opposite decision before the
+predictor changes its mind.  This overcomes the ‘loop
+exit’ issue.</p>
+
+<center>
+<img src="BTB_files/BTB.png" alt="Dynamic branch predictor state diagram">
+</center>
+
+<p>Note in the demonstration how the BTB state entries gravitate
+towards the (recent) majority behaviour of the corresponding branches.
+New entries are inserted by ‘new’ branches with the state
+set to ‘Weakly taken’.</p>
+
+<p>There are other, more sophisticated approaches to both dynamic and
+static prediction than are illustrated here. In particular, dynamic
+predictors keep more state and look for <i>patterns</i> in the branch
+history.</p>
+
+<p><i>Spatial</i> locality is not really applicable here: just because
+one instruction is a branch will not imply its immediate neighbours
+will be branches.  The cache ‘lines’ will therefore be a
+single element.  The <i>working set</i> of branches will typically be
+quite small – structures like nested loops will benefit most
+– so a small BTB will probably be fully associative.  However it
+need not be a single structure: a small, fully associative BTB can
+work in parallel with a larger ‘L2’ BTB.</p>
+
+<p>Simply cacheing encountered branches and assuming they will be
+taken in future is quite effective but can be improved upon.  Modern
+branch predictors note the history of conditional branch decisions and
+use this to help speculate on whether the branch will be taken on each
+encounter.</p>
+
+<script>
+var canvas_BTB = document.getElementById('canvas_BTB');
+run_BTB(canvas_BTB);
+</script>
+</body></html>
