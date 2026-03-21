@@ -1,0 +1,120 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>WAW Hazard &amp; Reorder Buffer</h2>
+<!--
+<a href="./branch_prediction.html">Branch Prediction</a>
+
+<p><mark>Hazard classification first?</mark></p>
+-->
+<p>
+The ‘classic’ five stage pipeline model includes a
+‘data memory’ stage: internal operations (the majority)
+traverse this without additional processing.  A more sophisticated
+structure can introduce multiple, <b>parallel processing
+pipelines</b>.  These may not be the same length.
+</p>
+
+<center>
+<p><canvas id="canvas_reorder" width="740" height="243"></canvas></p>
+<script src="WAW_reorder_buffer_demo_files/reorder.js"></script>
+</center>
+
+<p>
+Here is illustrated a WAW hazard where execution of one operation
+could overtake another and the register modifications could happen in
+a different order from the intended one.  This would be a Bad Thing.
+</p>
+
+<p>
+There are various ways to overcome this problem.  The one illustrated
+is a <b>reorder buffer</b>.  When <i>issued</i> the operations are
+tagged with a sequence number; this acts as a position in the reorder
+buffer where the result is placed.  The issue stage notes the
+destination so it can use this as a source for recent results Once the
+result is in the reorder buffer it validates the reorder buffer slot
+and can be <i>forwarded</i> to subsequent operations as necessary,
+although only to operations later in the object code.
+</p>
+
+<p>
+To avoid running out of reorder buffer space the results
+are <b>retired</b> to the register file.  This is done <i>in
+order</i>, oldest first.  Only validated results from otherwise
+completed operations can be retired.  When a result it retired the
+slot becomes available for reuse which is done cyclically.<br>
+Not all instructions produce register results (branches for example)
+but if there are concerns about retiring too slowly - for example to
+catch up after having had to wait - more than one result could be
+written in each cycle.
+</p>
+
+<p>
+If parallel processing pipelines exist it may be possible to issue
+more than one instruction in a single cycle.  Instructions can even be
+issued <i>out of order</i>.  Provided that their reorder buffer
+sequence reflects the written order of the operations this is not
+going to affect the programmers' view of execution - except it might
+run a bit faster.
+</p>
+
+<p>
+Results in a reorder buffer may be reused for later operations but
+they are still temporary and speculative.  In nearly every case they
+will be correct.  Occasionally, though, something will go wrong.  The
+most common such <b>exception</b> will be a <b>memory fault</b> which
+triggers paging.
+</p>
+
+<p>
+This is a hard problem, since what is wanted is the memory to work and
+the application to continue but, to reach that point the processor
+needs to service the exception, organise the paging (via the O.S.)
+and, in all likelihood, goes away to run other applications whilst
+waiting for the disk.  When it returns it must be able to resume as if
+nothing had happened.  For example, if a register value had been
+incremented after the load it must not be incremented again!
+</p>
+
+<p>There are two, basic approaches:</p>
+
+<ul>
+
+<li>Record everything which has already been done and don't do these
+(again) when returning.</li>
+
+<li>Discard any changes which <i>should have</i> followed the
+exception point and restart from the load (or store) which caused the
+exception.</li>
+
+</ul>
+
+<p>
+In principle the first option saves a little (repeat) processing but
+it is much more complex to implement than the second.  Anyway, such
+exceptions are rare and already expensive when they happen so a little
+extra processing cost is not significant.
+</p>
+
+<p>
+A reorder buffer makes the second option easy.  The failed load (or
+store) is noted in its appropriate reorder buffer slot and all the
+(speculative) results behind that are discarded.  When all results up
+to that point have been retired the processor is in a ‘clean’
+state with regard to the instructions written by the programmer/compiler.
+An exception return to rerun the failed load (or store) will exactly
+reflect what was intended.
+</p>
+
+<blockquote>
+In the interactive example, if the first load aborted it would be
+signalled at cycle&nbsp;4 when S0 is filled.  Notice that R1 has
+already been changed <i>and used</i> but no permanent changes have
+reached the register file; they can all be safely discarded.
+</blockquote>
+
+<hr>
+
+<script>
+var canvas_reorder = document.getElementById('canvas_reorder');
+run_reorder(canvas_reorder);
+</script>
+</body></html>
