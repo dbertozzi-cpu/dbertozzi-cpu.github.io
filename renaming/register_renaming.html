@@ -1,0 +1,65 @@
+<!--Register renaming-->
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>Register renaming</h2>
+<p>
+Register renaming is a more flexible mechanism for
+reordering (as in sorting back into order those which have got out of
+order) instructions and enabling clean handling of hazards.
+</p>
+
+<p>
+Renaming separates the name (address) of the physical register from
+the name the programmer is using for it.  This is a <i>dynamic</i>
+process.  Each time the code wants to write to a register a
+fresh <i>physical</i> register is assigned.  This means that more
+registers are implemented than the programmer/compiler sees.
+(The demonstration below has far fewer registers than a RISC
+processor.)
+</p>
+
+<center>
+<p><canvas id="canvas_renaming" width="740" height="342"></canvas></p>
+<script src="register_renaming_files/renaming.js"></script>
+</center>
+
+<blockquote><i>
+Note: for legibility and comparison purposes the users' register names 
+have been left in the processing stages (this information isn't needed by the 
+machine.
+</i></blockquote>
+
+<p>
+The register mappings – as seen at the issue stage – can
+be recorded each time there is the possibility of an exception (such
+as when loads or stores are issued); if an exception occurs this can
+then be restored.  Physical registers are recycled when their old
+values are no longer of any use, which is when all preceding
+operations have completed or are guaranteed to complete correctly.
+</p>
+
+<p>
+The possibility of <b>superscalar</b> issue should be fairly clear, here.
+A <text style="font-family:'Courier New'">load</text> and a 
+<text style="font-family:'Courier New'">move</text> can be issued
+simultaneously when there are no <i>dependencies</i> = which there
+aren't between the pairs of operations as written.
+</p>
+
+<p>
+There will be more physical registers than register names in the ISA
+(Instruction Set Architecture).  Given sufficient physical registers
+it is possible to support <b>multithreading</b> (discussed in Week 9);
+each thread has an exclusive dynamic selection of the available
+physical registers which allows the instruction issuer to choose
+instructions from a mixture of threads on a cycle-by-cycle basis.
+Each thread has a separate mapping for its registers so all the R0s
+(etc.) map to unique physical registers.
+</p>
+
+<hr>
+
+<script>
+var canvas_renaming  = document.getElementById('canvas_renaming')
+run_renaming(canvas_renaming);
+</script>
+</body></html>
