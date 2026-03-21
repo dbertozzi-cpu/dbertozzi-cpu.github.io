@@ -1,13 +1,14 @@
 <html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>WAW Hazard &amp; Reorder Buffer</h2>
+<meta charset="UTF-8">
+<!-- <meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h2>WAW Hazard &amp; Reorder Buffer</h2>-->
 <!--
 <a href="./branch_prediction.html">Branch Prediction</a>
 
 <p><mark>Hazard classification first?</mark></p>
 -->
 <p>
-The ‘classic’ five stage pipeline model includes a
-‘data memory’ stage: internal operations (the majority)
+The â€˜classicâ€™ five stage pipeline model includes a
+â€˜data memoryâ€™ stage: internal operations (the majority)
 traverse this without additional processing.  A more sophisticated
 structure can introduce multiple, <b>parallel processing
 pipelines</b>.  These may not be the same length.
@@ -98,7 +99,7 @@ extra processing cost is not significant.
 A reorder buffer makes the second option easy.  The failed load (or
 store) is noted in its appropriate reorder buffer slot and all the
 (speculative) results behind that are discarded.  When all results up
-to that point have been retired the processor is in a ‘clean’
+to that point have been retired the processor is in a â€˜cleanâ€™
 state with regard to the instructions written by the programmer/compiler.
 An exception return to rerun the failed load (or store) will exactly
 reflect what was intended.
