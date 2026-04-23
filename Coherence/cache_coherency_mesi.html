@@ -1,0 +1,75 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h1>MESI cache coherence protocol</h1>
+
+<p>Each cache line has a state machine which operates as follows:</p>
+
+<center>
+<img src="cache_coherency_mesi_files/MESI.png" alt="MESI state diagram">
+</center>
+
+<ul>
+
+<li>A processor reference may cause a state change in the local,
+   addressed cache line (solid lines).</li>
+
+<li>A local state change may be output to the bus.  This is snooped by
+    other caches and causes a state change in other caches which
+    contain a copy of that line (dashed lines).</li>
+
+<li>Many operations will cause a cache <b>flush</b>, copying a
+    modified line back to memory (or a lower cache level) from where
+    it can be picked up again by other caches (where any out of date
+    copies will have been marked 'invalid').<br>
+    The only case to escape a flush is when someone else reads an
+    Exclusive line - which is not modified but ceases to be
+    exclusive.</li>
+
+</ul>
+
+<p>When reading a locally <i>invalid</i> line the data can be fetched
+from the memory or, possibly, from another cache.  Other caches must
+be interrogated anyway, since the state transition depends on whether
+another cache holds the line (go to <i><b>S</b>hared</i>) or not (go
+to <i><b>E</b>xclusive</i>).</p>
+
+<center>
+<p><canvas id="canvas_MESI" width="860" height="295"></canvas></p>
+<script src="cache_coherency_mesi_files/MESI.js"></script>
+</center>
+
+<p>The values in the figure are addresses/tags, not data values.</p>
+
+<p><i>Note: in this demonstration the <b>memory</b> is shaded to
+indicate the lines which are invalid - i.e. that line is
+'<b>M</b>odified' in one of the caches.  This state is </i>not<i> kept
+explicitly as part of the memory system.  Its use here is simply to
+help with visualisation.</i></p>
+
+<h3>Instructions</h3>
+
+<ul>
+
+  <li>Click on processors to instigate <b>read</b> (green/left) or
+    <b>write</b> (red/right) operations on particular addresses.</li>
+
+<li>Observe any state changes in the caches.</li>
+
+</ul>
+
+<p>A subtle case: try writing on one processor and then writing the
+same line on a different processor.  The first processor's cache
+updates the memory even though the line is about to be modified.<br>
+Note that these are <i>cache lines</i>, so the first write may be to
+a <i>different word</i> in the line from the second so this ensures
+that the first update is kept.</p>
+
+<p>The ‘Memory’ line shows when and where the main memory
+is out of date.</p>
+
+<hr>
+
+<script>
+var canvas_MESI   = document.getElementById('canvas_MESI');
+run_MESI(canvas_MESI);
+</script>
+</body></html>
