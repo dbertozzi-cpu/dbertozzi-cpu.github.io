@@ -1,0 +1,22 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><p><b>Parallelism: Amdahl ‘speed up’ graph plotter.</b></p>
+
+<center>
+<p><canvas id="canvas_Amdahl" width="850" height="540"></canvas></p>
+<script src="amdahl_plotter_files/Amdahl.js"></script>
+</center>
+
+<p>Observe that even if <i>most</i> of the code is parallelisable the
+speed-up can be quite limited.  For example if 90% of the code can be
+parallelised the maximum possible speed-up is 10x.  If half the code
+is parallelised the best (with an infinite number of processors) is a
+doubling.  all this assumes there is no overhead in organising the
+parallel processing.<br>
+Try plotting at 100% parallel to see the limit.</p>
+
+<hr>
+<script>
+var canvas_Amdahl = document.getElementById('canvas_Amdahl');
+run_Amdahl(canvas_Amdahl);
+</script>
+</body></html>
